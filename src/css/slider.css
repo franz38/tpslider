@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  height: 100%;
+  color: #333;
+  font-family: 'Lexend', sans-serif;
+  text-align: center;
+  letter-spacing: 0.15em; }
+
+.wrapper {
+  position: relative;
+  margin: auto;
+  width: 100%; }
+  @media (min-width: 1000px) {
+    .wrapper {
+      width: 1000px; } }
+  .wrapper .slides-frame {
+    overflow: hidden;
+    margin: 0px; }
+  .wrapper .slides {
+    display: flex;
+    position: relative;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: max-content; }
+    .wrapper .slides.shifting {
+      transition: left .2s ease-out; }
+    .wrapper .slides .slide {
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none; }
+  .wrapper .jas__nav {
+    display: flex;
+    justify-content: center; }
+    .wrapper .jas__nav .jas__nav-button {
+      margin: 0px .25rem;
+      padding: 0px .25rem;
+      cursor: pointer; }
+  .wrapper .prev,
+  .wrapper .next {
+    position: absolute;
+    top: 50%;
+    width: 4rem;
+    height: 4rem;
+    margin-top: -2rem;
+    z-index: 2;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none; }
+    .wrapper .prev:active,
+    .wrapper .next:active {
+      transform: scale(0.8); }
+  .wrapper .prev {
+    left: -20px; }
+  .wrapper .next {
+    right: -20px; }
+
+/*# sourceMappingURL=slider.css.map */

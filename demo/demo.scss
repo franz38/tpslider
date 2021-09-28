@@ -1,0 +1,223 @@
+$white: #F4F1DE;
+$black: #293241;
+
+$code__purple: #FA49B9;
+$code__blue: #61AFEF;
+$code__red: #E06C75;
+$code__green: #98C379;
+$code__yellow: #D19A66;
+$code__grey: #ABB2BF;
+
+pre > code {
+  .code__purple{ color: #FA49B9;}
+  .code__blue{ color: #61AFEF;}
+  .code__red{ color: #E06C75;}
+  .code__green{ color: #98C379;}
+  .code__yellow{ color: #D19A66;}
+  .code__grey{ color: #ABB2BF;}
+}
+
+
+
+
+body{
+  background-color: $black;
+  color: $white;
+}
+
+.wrapper{
+  margin-top: 4rem;
+}
+
+section{
+  // position: relative;
+  margin: 8rem 0px;
+  h2{
+    font-size: 2rem;
+    // width: 5rem;
+    // position: absolute;
+    // transform: rotate(90deg);
+  }
+
+  .code-block{
+    width: 60rem;
+    margin:4rem auto;
+    background: rgba(#000, .05);
+    box-shadow: inset 20px 20px 20px -5px rgba(0, 0, 0, 0.06), inset -20px -20px 20px -5px rgba(255, 255, 255, 0.02);
+    text-align: left;
+    padding: 1rem 3rem;
+    border-radius: 12px;
+    pre, code{
+      font-family: 'Ubuntu Mono', monospace;
+      line-height: 20px;
+      color: $code__grey;
+
+      &::selection, &> span::selection{
+        background-color: rgba($code__grey, .1);
+      }
+    }
+  }
+}
+
+.wrapper{
+
+  .slide{
+    padding: 0px 2rem;
+  }
+
+  .slide > .dummy{ 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: calc(100% - 8px);
+    height: 10rem;
+    width: 16rem;
+    border:4px solid #F4F1DE;
+    color:#F4F1DE;
+    background-color: rgba(#F4F1DE, .2);
+    border-radius: 2rem;
+    font-size: 70px;
+    padding-left: 1rem;
+    text-align: left;
+    font-weight: 600;
+
+    transition: background-color .2s ease, width .2s ease;
+  }
+
+
+  .dragging>.slide>img{
+    transform: scale(0.95) skewX(3deg);
+  }
+  .slide > img{
+    // width: calc(100% - 4rem);
+    width: 100%;
+    margin: auto;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 14px 0px #0000001c;
+    border-radius: 1px;
+    transition: transform .2s ease;
+  }
+
+  .slide.active > .dummy{
+    border-color: #E07A5F;
+    background-color: rgba(#E07A5F, .6);
+  }
+
+  .slider > p{
+    margin-top: 2rem;
+  }
+
+  .prev, .next{
+    font-size: 4rem;
+    font-weight: 600;
+    line-height: 4rem;
+    color: #F4F1DE;
+  }
+
+  .prev{
+    left: -4rem;
+  }
+
+  .next{
+    right: -4rem;
+  }
+
+  .jas__nav{
+    margin-top: 2rem;
+  }
+
+  .jas__nav > .jas__nav-button{
+    font-weight: 500;
+    min-width: 1.5rem;
+    height: 1.5rem;
+
+    transition: background-color .2s ease;
+  }
+
+  .jas__nav > .jas__nav-button--active{
+    text-decoration: underline;
+    color: $black ;
+    background-color: $white;
+  }
+
+}
+
+
+// #wrapper2{
+
+//   .slides{
+//     padding: 2rem 0px;  
+//   }
+
+//   .slide { 
+//     position: relative;
+//     height: 20rem;
+//     width: 4rem;
+//     border-radius: 2rem;
+//     margin: 0px 1rem;
+//     // border:4px solid #333;
+//     overflow: hidden;
+//     display: flex;
+//     justify-content: center;
+//     box-shadow: 0 0 10px 0px #33333340;
+
+//     transition: transform .2s ease, width .2s ease;
+//   }
+
+//   .slide:before{
+//     content: "";
+//     position: absolute;
+//     bottom: .75rem;
+//     width: 2.5rem;
+//     height: 2.5rem;
+//     border-radius: 2rem;
+//     background: #fff;
+//     left: .75rem;
+//     display: none;
+//   }
+
+//   .slide.active{
+//     width: 16rem;
+//     transform: scale(1.1);
+
+//     &:after{
+
+//     }
+//   }
+
+//   .slide:after{
+//     content: "";
+//     position: absolute;
+//     width: 100%;
+//     height: 100%;
+//     background: radial-gradient(transparent, #00000029);
+//   }
+
+//   .slide > img{
+//     // transform: translateX(calc(-50%));
+//     width: 16rem;
+//     // height: 100%;
+//     object-fit: cover;
+//     object-position: center center;
+//   }
+
+//   .prev, .next{
+//     background: #fff;
+//     width: 3.5rem;
+//     height: 3.5rem;
+//     border-radius: 50%;
+//     bottom: - 4rem;
+//     top: auto;
+//     box-shadow: 0 0 10px 0px #33333340;
+//   }
+
+//   .prev{
+//     right: calc(50% + 1rem);
+//     left: auto;
+//   }
+//   .next{
+//     left:  calc(50% + 1rem);
+//   }
+
+// }

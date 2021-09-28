@@ -1,0 +1,94 @@
+pre > code .code__purple {
+  color: #FA49B9; }
+pre > code .code__blue {
+  color: #61AFEF; }
+pre > code .code__red {
+  color: #E06C75; }
+pre > code .code__green {
+  color: #98C379; }
+pre > code .code__yellow {
+  color: #D19A66; }
+pre > code .code__grey {
+  color: #ABB2BF; }
+
+body {
+  background-color: #293241;
+  color: #F4F1DE; }
+
+.wrapper {
+  margin-top: 4rem; }
+
+section {
+  margin: 8rem 0px; }
+  section h2 {
+    font-size: 2rem; }
+  section .code-block {
+    width: 60rem;
+    margin: 4rem auto;
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: inset 20px 20px 20px -5px rgba(0, 0, 0, 0.06), inset -20px -20px 20px -5px rgba(255, 255, 255, 0.02);
+    text-align: left;
+    padding: 1rem 3rem;
+    border-radius: 12px; }
+    section .code-block pre, section .code-block code {
+      font-family: 'Ubuntu Mono', monospace;
+      line-height: 20px;
+      color: #ABB2BF; }
+      section .code-block pre::selection, section .code-block pre > span::selection, section .code-block code::selection, section .code-block code > span::selection {
+        background-color: rgba(171, 178, 191, 0.1); }
+
+.wrapper .slide {
+  padding: 0px 2rem; }
+.wrapper .slide > .dummy {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: calc(100% - 8px);
+  height: 10rem;
+  width: 16rem;
+  border: 4px solid #F4F1DE;
+  color: #F4F1DE;
+  background-color: rgba(244, 241, 222, 0.2);
+  border-radius: 2rem;
+  font-size: 70px;
+  padding-left: 1rem;
+  text-align: left;
+  font-weight: 600;
+  transition: background-color .2s ease, width .2s ease; }
+.wrapper .dragging > .slide > img {
+  transform: scale(0.95) skewX(3deg); }
+.wrapper .slide > img {
+  width: 100%;
+  margin: auto;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 1px 1px 14px 0px #0000001c;
+  border-radius: 1px;
+  transition: transform .2s ease; }
+.wrapper .slide.active > .dummy {
+  border-color: #E07A5F;
+  background-color: rgba(224, 122, 95, 0.6); }
+.wrapper .slider > p {
+  margin-top: 2rem; }
+.wrapper .prev, .wrapper .next {
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 4rem;
+  color: #F4F1DE; }
+.wrapper .prev {
+  left: -4rem; }
+.wrapper .next {
+  right: -4rem; }
+.wrapper .jas__nav {
+  margin-top: 2rem; }
+.wrapper .jas__nav > .jas__nav-button {
+  font-weight: 500;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  transition: background-color .2s ease; }
+.wrapper .jas__nav > .jas__nav-button--active {
+  text-decoration: underline;
+  color: #293241;
+  background-color: #F4F1DE; }
+
+/*# sourceMappingURL=demo.css.map */
