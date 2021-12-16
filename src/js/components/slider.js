@@ -54,9 +54,18 @@ class Pmanager{
 }
 
 
+class Slide{
+
+	constructor(){
+			// this.position
+	}
+
+}
+
+
 export class Slider{
 
-	constructor(dom, perView, slidesAmount, activeSlide, positions, autoPlayer, styleHandler, buttonManager, navigationManager, mouseDragManager){
+	constructor(dom, perView, slidesAmount, activeSlide, positions, autoPlayer, styleHandler, buttonManager, navigationManager, mouseDragManager, tmp_slides){
 
 		this.dom = dom
 		this.perView = perView
@@ -72,6 +81,8 @@ export class Slider{
 		window.addEventListener('resize', this.refreshStyle.bind(this, true));
 		this.mode = "slider"
 
+		this.tmp_slides = tmp_slides
+		this.tmp_activeSlide = tmp_slides[0]
 
 		this.autoPlayer = autoPlayer
 		if (this.autoPlayer != null){ this.autoPlayer.initialize(this) }
@@ -85,27 +96,14 @@ export class Slider{
 		this.mouseDragManager = mouseDragManager
 		if (this.mouseDragManager != null){ this.mouseDragManager.activate(this) }
 
-
-
 		this.initialize()
 
 	}
 
 	initialize(){
-		// this.setInputs()
 		this.shiftSlide(0, false)
 	}
 
-	setInputs(){
-		// click (+ swipe)
-	    this.dom.slidesBox.onmousedown = this.dragStart.bind(this);
-
-	    // Touch events
-	    this.dom.slidesBox.addEventListener('touchstart', this.dragStart.bind(this));
-	    this.dom.slidesBox.addEventListener('touchend', this.dragEnd.bind(this));
-	    this.dom.slidesBox.addEventListener('touchmove', this.dragAction.bind(this));
-
-	}
 
 	refreshStyle(shift=false){
 		this.positions = this.styleHandler.refreshStyle()
@@ -141,15 +139,15 @@ export class Slider{
 	parseId(id_to_test) {
 
 		// console.log(this.options.mode)
-	    if(id_to_test>=0 && id_to_test<this.positions.length){
-	      return id_to_test;
-	    }
-	    else if(id_to_test<0){
-	      return 0;
-	    }
-	    else{
-	      return this.positions.length-1;
-	    }
+	  if(id_to_test>=0 && id_to_test<this.positions.length){
+	    return id_to_test;
+	  }
+	  else if(id_to_test<0){
+	    return 0;
+	  }
+	  else{
+	    return this.positions.length-1;
+	  }
 
 	}
 
@@ -171,48 +169,30 @@ export class Slider{
 		this.shiftSlide(this.activeSlide + deltaPos);
 	}
 
+
 	shiftSlide(id_tmp, visibleTransition=true) {
 
-			// console.log(this.activeSlide);
-
-	    // remove 'active' class to the slide
-	    this.dom.slidesBox.getElementsByClassName('slide')[this.activeSlide].classList.remove("active")
-
-	    // if navigation dots are active, remove 'active' class to the navigation dot
-	    if(this.navigationManager != null){
-	    	let xx = Pmanager.phiToAbs(this.activeSlide, this)
-	      this.navigationManager.getDot(xx).classList.remove("jas__nav-button--active")
-	    }
-
+			this.tmp_activeSlide.deemphasizes()
 
 	    this.activeSlide = this.parseId(id_tmp);
-
+			console.log(this.activeSlide);
+			this.tmp_activeSlide = this.tmp_slides[this.parseId(id_tmp)]
 
 	    if (visibleTransition){
 	      this.dom.slidesBox.classList.add('shifting');
 	      this.dom.slidesBox.addEventListener(this.transitionEvent, this.transitionEndCallback.bind(this));
 	    }
 
-	    var position=this.positions[this.activeSlide];
-	    this.dom.slidesBox.style.left = position + "px";
+			var position = this.tmp_activeSlide.position
+	    this.dom.slidesBox.style.left = - position + "px";
 
 
-	    // add 'active' class to the slide
-	    this.dom.slidesBox.getElementsByClassName('slide')[this.activeSlide].classList.add("active")
+			this.tmp_activeSlide.highlight()
 
-	    // if navigation dots are active, add 'active' class to the navigation dot
-	    if(this.navigationManager != null){
-				let xx = Pmanager.phiToAbs(this.activeSlide, this)
-				this.navigationManager.getDot(xx).classList.add("jas__nav-button--active")
-	      // this.dom.navigator.getElementsByClassName('jas__nav-button')[].classList.add("jas__nav-button--active")
-	    }
-
-			// if (this.autoPlayer != null){ this.autoPlayer.wait = false; }
 			if (this.autoPlayer != null){ this.autoPlayer.resetTimeout() }
 
-			// console.log(this.activeSlide);
-
 	}
+
 
 	findSlideByPos(x){
 		var x_sum = 0;
@@ -238,14 +218,109 @@ export class Slider{
 
 export class LoopSlider extends Slider{
 
-	mode = "loop"
+	// initialize(){
+	// 	// this.shiftSlide(this.perView, false)
+	// }
 
-	initialize(){
-		this.setInputs()
-		// this.makeLoop()
-		this.shiftSlide(this.perView, false)
-		this.mode = "loop"
+	parseId(id_to_test){}
+
+	getSlide(id_to_test) {
+
+		// id_to_test =- this.tmp_slides.length
+		let pos = 0
+
+		if(id_to_test<0){
+			console.log("a");
+			this.tmp_activeSlide = this.tmp_slides[id_to_test+this.tmp_slides.length]
+			pos = this.tmp_activeSlide.getShadowPosition()
+
+		}
+		else if(id_to_test>=this.tmp_slides.length){
+			console.log("b");
+			this.tmp_activeSlide = this.tmp_slides[id_to_test-this.tmp_slides.length]
+			pos = this.tmp_activeSlide.getShadowPosition()
+			// if(this.tmp_activeSlide.id>parseInt(this.perView/2)-1){
+				console.log("jump");
+				this.dom.slidesBox.style.left = - this.tmp_activeSlide.getPosition() + "px"
+			// }
+		}
+		else{
+			console.log("c");
+			this.tmp_activeSlide = this.tmp_slides[id_to_test]
+			pos = this.tmp_activeSlide.getPosition()
+		}
+
+		return pos
 	}
+
+	shiftSlide(id_tmp, visibleTransition=true) {
+			console.log(id_tmp);
+			this.tmp_activeSlide.deemphasizes()
+
+	    this.activeSlide = id_tmp;
+			// console.log(this.activeSlide);
+			// this.tmp_activeSlide = this.tmp_slides[this.parseId(id_tmp)]
+			let position = this.getSlide(id_tmp)
+			console.log(position);
+
+	    if (visibleTransition){
+	      this.dom.slidesBox.classList.add('shifting');
+	      this.dom.slidesBox.addEventListener(this.transitionEvent, this.transitionEndCallback.bind(this));
+	    }
+
+			// var position = this.tmp_activeSlide.position
+	    this.dom.slidesBox.style.left = - position + "px";
+
+
+			this.tmp_activeSlide.highlight()
+
+			if (this.autoPlayer != null){ this.autoPlayer.resetTimeout() }
+
+	}
+
+
+	// shiftSlide(id_tmp, visibleTransition=true) {
+	//
+	// 		// console.log(this.activeSlide);
+	//
+	// 		// remove 'active' class to the slide
+	// 		this.dom.slidesBox.getElementsByClassName('slide')[this.activeSlide].classList.remove("active")
+	//
+	// 		// if navigation dots are active, remove 'active' class to the navigation dot
+	// 		if(this.navigationManager != null){
+	// 			let xx = Pmanager.phiToAbs(this.activeSlide, this)
+	// 			this.navigationManager.getDot(xx).classList.remove("jas__nav-button--active")
+	// 		}
+	//
+	//
+	// 		this.activeSlide = this.parseId(id_tmp);
+	//
+	//
+	// 		if (visibleTransition){
+	// 			this.dom.slidesBox.classList.add('shifting');
+	// 			this.dom.slidesBox.addEventListener(this.transitionEvent, this.transitionEndCallback.bind(this));
+	// 		}
+	//
+	// 		var position=this.positions[this.activeSlide];
+	// 		this.dom.slidesBox.style.left = position + "px";
+	//
+	//
+	// 		// add 'active' class to the slide
+	// 		this.dom.slidesBox.getElementsByClassName('slide')[this.activeSlide].classList.add("active")
+	//
+	// 		// if navigation dots are active, add 'active' class to the navigation dot
+	// 		if(this.navigationManager != null){
+	// 			let xx = Pmanager.phiToAbs(this.activeSlide, this)
+	// 			this.navigationManager.getDot(xx).classList.add("jas__nav-button--active")
+	// 			// this.dom.navigator.getElementsByClassName('jas__nav-button')[].classList.add("jas__nav-button--active")
+	// 		}
+	//
+	// 		// if (this.autoPlayer != null){ this.autoPlayer.wait = false; }
+	// 		if (this.autoPlayer != null){ this.autoPlayer.resetTimeout() }
+	//
+	// 		// console.log(this.activeSlide);
+	//
+	// }
 
 
 	dragAction (e) {

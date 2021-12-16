@@ -259,6 +259,71 @@
 
   </section>
 
+
+  <section>
+
+    <h2>Loop</h2>
+
+    <div class="slider-demo-box">
+
+      <div id="wrapper5" class="wrapper">
+        <div class="slides-frame">
+          <div class="slides">
+            <div class="slide" data-slideTitle="Slide 1">
+              <div class="dummy">1</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 2">
+              <div class="dummy">2</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 3">
+              <div class="dummy">3</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 4">
+              <div class="dummy">4</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 5">
+              <div class="dummy">5</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 6">
+              <div class="dummy">6</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 7">
+              <div class="dummy">7</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 8">
+              <div class="dummy">8</div>
+            </div>
+            <div class="slide" data-slideTitle="Slide 9">
+              <div class="dummy">9</div>
+            </div>
+          </div>
+        </div>
+        <a class="prev"><</a>
+        <a class="next">></a>
+      </div>
+
+    </div>
+
+    <div class="code-block">
+
+      <pre><code><span class="code__purple">new</span> <span class="code__blue">JASlider</span>({
+  <span class="code__red">wrapper</span>: <span class="code__green">"#wrapper"</span>,
+  <span class="code__red">perView</span>: <span class="code__yellow">2</span>,
+  <span class="code__red">breakpoints</span>: {
+    <span class="code__yellow">1200</span>: {
+      <span class="code__red">centered</span>: <span class="code__yellow">true</span>,
+      <span class="code__red">perView</span>: <span class="code__yellow">3</span>,
+    },
+    <span class="code__yellow">1600</span>: {
+      <span class="code__red">perView</span>: <span class="code__yellow">4</span>,
+    }
+  }
+})<span class="code__blue">.start()</span></code></pre>
+
+    </div>
+
+  </section>
+
   </body>
 
 
@@ -266,36 +331,43 @@
 
     import TPSlider from '../src/js/tpslider.js';
 
-    new TPSlider({
-      wrapper: "#wrapper",
-      perView: 3
-    }).start()
+    // new TPSlider({
+    //   wrapper: "#wrapper",
+    //   perView: 3
+    // }).start()
+    //
+    // new TPSlider({
+    //   wrapper: "#wrapper2",
+    //   centered: true,
+    //   navigation: true,
+    //   perView: 3
+    // }).start()
+    //
+    // new TPSlider({
+    //   wrapper: "#wrapper3",
+    //   autoplay: true,
+    //   perView: 3
+    // }).start()
+    //
+    // new TPSlider({
+    //   wrapper: "#wrapper4",
+    //   perView: 2,
+    //   breakpoints: {
+    //     1200: {
+    //       centered:true,
+    //       perView: 3
+    //     },
+    //     1600: {
+    //       perView: 4
+    //     }
+    //   }
+    // }).start()
 
     new TPSlider({
-      wrapper: "#wrapper2",
-      centered: true,
+      wrapper: "#wrapper5",
+      //mode: "loop",
       navigation: true,
       perView: 3
-    }).start()
-
-    new TPSlider({
-      wrapper: "#wrapper3",
-      autoplay: true,
-      perView: 3
-    }).start()
-
-    new TPSlider({
-      wrapper: "#wrapper4",
-      perView: 2,
-      breakpoints: {
-        1200: {
-          centered:true,
-          perView: 3
-        },
-        1600: {
-          perView: 4
-        }
-      }
     }).start()
 
 

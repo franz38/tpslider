@@ -151,27 +151,32 @@ export class SliderStyler{
 
 export class LoopStyler extends SliderStyler{
 
-  constructor(dom, options, sliderManager){
+  constructor(dom, options, sliderManager, slides){
     super(dom, options, sliderManager)
-    this.addMoreSlides()
+    this.addMoreSlides(slides)
   }
 
-  addMoreSlides(){
+  addMoreSlides(slides){
+
+    console.log(slides);
 
     // console.log(this.dom.slidesBox.children[1])
 
     let to_prepend = [];
 
     for(var i=0; i<this.perView; i++){
-      let slide_copy = this.dom.slidesBox.children[i].cloneNode([true])
-      to_prepend.push( this.dom.slidesBox.children[ this.slidesAmount - 1 - i ].cloneNode([true]) )
+      let slide_copy = slides[i].dom.cloneNode([true])
       this.dom.slidesBox.appendChild(slide_copy)
+      slides[i].setShadow(slide_copy)
     }
 
-    for(let i=0; i<to_prepend.length; i++){
-      let slide_copy = to_prepend[i].cloneNode([true])
-      this.dom.slidesBox.prepend(slide_copy)
+    for(var i=0; i<this.perView; i++){
+      let id = slides.length - i -1
+      let slide = slides[id].dom.cloneNode([true])
+      this.dom.slidesBox.prepend(slide)
+      slides[id].setShadow(slide)
     }
+
 
   }
 

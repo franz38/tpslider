@@ -27,6 +27,47 @@ import { SliderStyler, LoopStyler } from './components/stylehandler.js';
  *
  */
 
+ class Slide{
+
+   constructor(dom_slide, id){
+     this.id = id
+     this.dom = dom_slide
+     this.shadow = null
+     this.shadowPosition = null
+     this.width = dom_slide.offsetWidth
+     this.position = dom_slide.offsetLeft
+     this.dot = null
+   }
+
+   setPrevNext(prev, next){
+     this.prev = prev
+     this.next = next
+   }
+
+   setShadow(dom_shadow){
+     this.shadow = dom_shadow
+   }
+
+   getShadowPosition(){ return this.shadow.offsetLeft; }
+
+   getPosition(){ return this.dom.offsetLeft; }
+
+   setDot(dom_dot){
+     this.dot = dom_dot
+   }
+
+   highlight(){
+     this.dom.classList.add("active")
+     if(this.dot != null){ this.dot.classList.add("jas__nav-button--active") }
+   }
+
+   deemphasizes(){
+     this.dom.classList.remove("active")
+     if(this.dot != null){ this.dot.classList.remove("jas__nav-button--active") }
+   }
+
+ }
+
 export default class TPSlider{
 
   constructor(custom_options){
@@ -35,11 +76,15 @@ export default class TPSlider{
 
   start(){
 
+    this.tmp_slides = []
+
     // copy options and integrathe them with default
     this.parseOptions(this.custom_options)
 
     // look for wrapper and slides container
     this.getDom()
+
+    // console.log(this.tmp_slides);
 
     var autoplayer = null;
     if (this.options.autoplay){
@@ -54,7 +99,7 @@ export default class TPSlider{
 
     var navigationManager = null;
     if(this.options.navigation){
-      navigationManager = new NavigationManager(this.dom.wrapper, this.dom.slidesBox, this.options.navigationBox, this.options.navigationDot , this.options.navigationLabels)
+      navigationManager = new NavigationManager(this.dom.wrapper, this.dom.slidesBox, this.options.navigationBox, this.options.navigationDot , this.options.navigationLabels, this.tmp_slides)
     }
     // console.log(navigationManager)
 
@@ -67,13 +112,13 @@ export default class TPSlider{
     if (this.options.mode == "slider"){
 
       var stylehandler = new SliderStyler(this.dom, this.options, this.sliderManager)
-      var slid = new Slider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, this.positions, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager);
+      var slid = new Slider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, this.positions, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager, this.tmp_slides);
 
     }
     else if (this.options.mode == "loop"){
 
-      var stylehandler = new LoopStyler(this.dom, this.options, this.sliderManager)
-      var slid = new LoopSlider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, this.positions, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager);
+      var stylehandler = new LoopStyler(this.dom, this.options, this.sliderManager, this.tmp_slides)
+      var slid = new LoopSlider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, this.positions, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager, this.tmp_slides);
 
     }
 
@@ -151,6 +196,10 @@ export default class TPSlider{
 
     this.sliderManager.slider_width = this.dom.wrapper.offsetWidth;
     this.sliderManager.amount = this.dom.slidesBox.getElementsByClassName('slide').length
+
+    for(let i=0; i<this.sliderManager.amount; i++){
+      this.tmp_slides.push( new Slide(this.dom.slidesBox.getElementsByClassName('slide')[i], i) )
+    }
 
   }
 
