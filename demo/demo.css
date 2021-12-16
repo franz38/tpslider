@@ -12,6 +12,13 @@ pre > code .code__grey {
   color: #ABB2BF; }
 
 body {
+  height: 100%;
+  color: #333;
+  font-family: 'Lexend', sans-serif;
+  text-align: center;
+  letter-spacing: 0.15em; }
+
+body {
   background-color: #293241;
   color: #F4F1DE; }
 
@@ -71,6 +78,11 @@ section {
 .wrapper .slider > p {
   margin-top: 2rem; }
 .wrapper .prev, .wrapper .next {
+  position: absolute;
+  top: 50%;
+  width: 4rem;
+  height: 4rem;
+  margin-top: -2rem;
   font-size: 4rem;
   font-weight: 600;
   line-height: 4rem;

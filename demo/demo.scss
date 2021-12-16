@@ -17,7 +17,13 @@ pre > code {
   .code__grey{ color: #ABB2BF;}
 }
 
-
+body {
+  height: 100%;
+  color: #333;
+  font-family: 'Lexend', sans-serif;
+  text-align: center;
+  letter-spacing: 0.15em;
+}
 
 
 body{
@@ -65,7 +71,7 @@ section{
     padding: 0px 2rem;
   }
 
-  .slide > .dummy{ 
+  .slide > .dummy{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -109,6 +115,11 @@ section{
   }
 
   .prev, .next{
+    position: absolute;
+    top: 50%;
+    width: 4rem;
+    height: 4rem;
+    margin-top: -2rem;
     font-size: 4rem;
     font-weight: 600;
     line-height: 4rem;
@@ -147,10 +158,10 @@ section{
 // #wrapper2{
 
 //   .slides{
-//     padding: 2rem 0px;  
+//     padding: 2rem 0px;
 //   }
 
-//   .slide { 
+//   .slide {
 //     position: relative;
 //     height: 20rem;
 //     width: 4rem;

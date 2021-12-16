@@ -1,20 +1,10 @@
 * {
   box-sizing: border-box; }
 
-body {
-  height: 100%;
-  color: #333;
-  font-family: 'Lexend', sans-serif;
-  text-align: center;
-  letter-spacing: 0.15em; }
-
 .wrapper {
   position: relative;
   margin: auto;
   width: 100%; }
-  @media (min-width: 1000px) {
-    .wrapper {
-      width: 1000px; } }
   .wrapper .slides-frame {
     overflow: hidden;
     margin: 0px; }
@@ -37,14 +27,12 @@ body {
     .wrapper .jas__nav .jas__nav-button {
       margin: 0px .25rem;
       padding: 0px .25rem;
+      user-select: none;
+      -webkit-user-select: none;
       cursor: pointer; }
   .wrapper .prev,
   .wrapper .next {
-    position: absolute;
-    top: 50%;
-    width: 4rem;
-    height: 4rem;
-    margin-top: -2rem;
+    display: inline-block;
     z-index: 2;
     cursor: pointer;
     user-select: none;

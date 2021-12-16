@@ -2,13 +2,7 @@
 
 * { box-sizing: border-box; }
 
-body {
-  height: 100%;
-  color: #333;
-  font-family: 'Lexend', sans-serif;
-  text-align: center;
-  letter-spacing: 0.15em;
-}
+
 
 .wrapper {
   position: relative;
@@ -37,15 +31,6 @@ body {
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
-      // max-width: 100%;
-      // height: 100%;
-      // cursor: pointer;
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: center;
-      // position: relative;
-      // border-radius: 2px;
-      // padding: 0px 2rem;
     }
   }
 
@@ -64,22 +49,12 @@ body {
 
   .prev,
   .next {
-    position: absolute;
-    top: 50%;
-    width: 4rem;
-    height: 4rem;
-    //background: red;
-    //border-radius: 50px;
-    margin-top: -2rem;
-    //box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+
+    display: inline-block;
     z-index: 2;
-    // background-size: 22px;
-    // background-position: center;
-    // background-repeat: no-repeat;
     cursor: pointer;
     user-select:none;
     -webkit-user-select:none;
-
 
 
     &:active{
@@ -88,12 +63,10 @@ body {
   }
 
   .prev {
-    //background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronLeft-512.png);
     left: -20px;
   }
 
   .next {
-    //background-image: url(https://cdn0.iconfinder.com/data/icons/navigation-set-arrows-part-one/32/ChevronRight-512.png);
     right: -20px;
   }
 
