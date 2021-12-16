@@ -56,18 +56,9 @@
     user-select:none;
     -webkit-user-select:none;
 
-
     &:active{
       transform: scale(.8);
     }
-  }
-
-  .prev {
-    left: -20px;
-  }
-
-  .next {
-    right: -20px;
   }
 
 }

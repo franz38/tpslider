@@ -40,9 +40,5 @@
     .wrapper .prev:active,
     .wrapper .next:active {
       transform: scale(0.8); }
-  .wrapper .prev {
-    left: -20px; }
-  .wrapper .next {
-    right: -20px; }
 
 /*# sourceMappingURL=slider.css.map */
