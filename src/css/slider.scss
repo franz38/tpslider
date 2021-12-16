@@ -2,8 +2,6 @@
 
 * { box-sizing: border-box; }
 
-
-
 .wrapper {
   position: relative;
   margin: auto;
@@ -20,7 +18,6 @@
     height: 100%;
     top: 0;
     left: 0;
-    //width: fit-content;
     width: max-content;
 
     &.shifting {
