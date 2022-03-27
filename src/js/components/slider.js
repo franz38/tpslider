@@ -75,14 +75,17 @@ export class Slider{
 		this.styleHandler = styleHandler
 		this.slides = this.dom.slidesBox.children
 
+		this.tmp_slides = tmp_slides
+		// console.log(tmp_slides);
+		this.tmp_activeSlide = tmp_slides[0]
+
 		this.transitionEvent = this.whichTransitionEvent()
 
 		this.refreshStyle()
 		window.addEventListener('resize', this.refreshStyle.bind(this, true));
 		this.mode = "slider"
 
-		this.tmp_slides = tmp_slides
-		this.tmp_activeSlide = tmp_slides[0]
+
 
 		this.autoPlayer = autoPlayer
 		if (this.autoPlayer != null){ this.autoPlayer.initialize(this) }
@@ -106,7 +109,7 @@ export class Slider{
 
 
 	refreshStyle(shift=false){
-		this.positions = this.styleHandler.refreshStyle()
+		this.positions = this.styleHandler.refreshStyle(this.tmp_slides)
 
 		if (shift){
 		  this.shiftSlide(this.activeSlide)
@@ -138,23 +141,22 @@ export class Slider{
 
 	parseId(id_to_test) {
 
-		// console.log(this.options.mode)
-	  if(id_to_test>=0 && id_to_test<this.positions.length){
+	  if(id_to_test>=0 && id_to_test<this.tmp_slides.length){
 	    return id_to_test;
 	  }
 	  else if(id_to_test<0){
 	    return 0;
 	  }
 	  else{
-	    return this.positions.length-1;
+	    return this.tmp_slides.length-1;
 	  }
 
 	}
 
 	dragRelease(dx){
-		let currentpos = this.slides[this.activeSlide].offsetLeft
-		let bb = this.findSlideByPos(parseInt(currentpos) + parseInt(dx));
-		this.shiftSlide(bb);
+		let currentpos = this.tmp_slides[this.activeSlide].position
+		let targetIndex = this.findSlideByPos(parseInt(currentpos) + parseInt(dx));
+		this.shiftSlide(targetIndex);
 	}
 
 	navigationClick(e){
@@ -175,7 +177,9 @@ export class Slider{
 			this.tmp_activeSlide.deemphasizes()
 
 	    this.activeSlide = this.parseId(id_tmp);
-			console.log(this.activeSlide);
+
+			// console.log(id_tmp + " ->" + this.activeSlide);
+
 			this.tmp_activeSlide = this.tmp_slides[this.parseId(id_tmp)]
 
 	    if (visibleTransition){
@@ -184,6 +188,7 @@ export class Slider{
 	    }
 
 			var position = this.tmp_activeSlide.position
+
 	    this.dom.slidesBox.style.left = - position + "px";
 
 
@@ -241,13 +246,13 @@ export class LoopSlider extends Slider{
 			pos = this.tmp_activeSlide.getShadowPosition()
 			// if(this.tmp_activeSlide.id>parseInt(this.perView/2)-1){
 				console.log("jump");
-				this.dom.slidesBox.style.left = - this.tmp_activeSlide.getPosition() + "px"
+				this.dom.slidesBox.style.left = - this.tmp_activeSlide.position + "px"
 			// }
 		}
 		else{
 			console.log("c");
 			this.tmp_activeSlide = this.tmp_slides[id_to_test]
-			pos = this.tmp_activeSlide.getPosition()
+			pos = this.tmp_activeSlide.position
 		}
 
 		return pos

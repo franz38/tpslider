@@ -84,13 +84,26 @@ export class SliderStyler{
 
   }
 
-  refreshStyle(){
+  getBreakPoint(){
+
+    var bp = new BreakpointStyle(-1, {})
+    for(var i=0; i<this.breakpoints.length;i++){
+      if(this.breakpoints[i].isActive()){
+        bp.add(this.breakpoints[i])
+      }
+
+    }
+    return bp
+  }
+
+  refreshStyle(slides){
 
     this.actualBreakpointSum = this.getBreakPoint()
     var style = this.actualBreakpointSum.getStyle()
 
-    this.makePositions()
     this.setWrapperWidth()
+    this.makePositions(slides)
+
     return this.positions;
 
   }
@@ -110,29 +123,34 @@ export class SliderStyler{
 
   }
 
-  getBreakPoint(){
 
-    var bp = new BreakpointStyle(-1, {})
-    for(var i=0; i<this.breakpoints.length;i++){
-      if(this.breakpoints[i].isActive()){
-        bp.add(this.breakpoints[i])
-      }
+  makePositions(slides){
 
-    }
-    return bp
-  }
-
-  makePositions(){
+    // console.log(this.dom.wrapper.offsetWidth);
+    // console.log(this.dom.wrapper.clientWidth);
+    // console.log(this.dom.wrapper.scrollWidth);
 
     // centered positions
     if(this.actualBreakpointSum.isCentered()){
-      var steps = this.dom.slidesBox.children.length
-      this.positions = new Array(steps);
-      var tot = parseInt(this.dom.wrapper.offsetWidth / 2)
-      for(var i=0; i<steps; i++){
-        this.positions[i] = tot - (this.dom.slidesBox.children[i].offsetWidth / 2)
-        tot -= this.dom.slidesBox.children[i].offsetWidth
-      }
+
+
+
+      var offset = this.dom.wrapper.offsetWidth/2 - slides[0].width/2;
+      slides[0].setOffset(offset);
+
+      slides.forEach(slide => {
+        slide.setPosition(offset)
+      });
+
+
+      // var steps = this.dom.slidesBox.children.length
+      // this.positions = new Array(steps);
+      // var tot = parseInt(this.dom.wrapper.offsetWidth / 2)
+      // for(var i=0; i<steps; i++){
+      //   this.positions[i] = tot - (this.dom.slidesBox.children[i].offsetWidth / 2)
+      //   tot -= this.dom.slidesBox.children[i].offsetWidth
+      // }
+      // console.log(this.positions[0]);
     }
     // normal positions
     else{

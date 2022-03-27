@@ -186,6 +186,7 @@
       <pre><code><span class="code__purple">new</span> <span class="code__blue">JASlider</span>({
   <span class="code__red">wrapper</span>: <span class="code__green">"#wrapper"</span>,
   <span class="code__red">perView</span>: <span class="code__yellow">3</span>,
+  <span class="code__red">autoplay</span>: <span class="code__yellow">true</span>,
   <span class="code__red">centered</span>: <span class="code__yellow">true</span>
 })<span class="code__blue">.start()</span></code></pre>
 
@@ -333,7 +334,7 @@
 
     new TPSlider({
       wrapper: "#wrapper",
-      perView: 3
+      perView: 3,
     }).start()
     //
     new TPSlider({
@@ -343,11 +344,12 @@
       perView: 3
     }).start()
     //
-    // new TPSlider({
-    //   wrapper: "#wrapper3",
-    //   autoplay: true,
-    //   perView: 3
-    // }).start()
+    new TPSlider({
+      wrapper: "#wrapper3",
+      autoplay: true,
+      centered:true,
+      perView: 3
+    }).start()
     //
     // new TPSlider({
     //   wrapper: "#wrapper4",

@@ -55,9 +55,6 @@ export default class SwipeManager{
 	}
 
 	dragEnd(e) {
-		var tmp_pos = this.slidesBox.offsetLeft;
-
-		var dir =-1;
 
     this.slider.dragRelease(this.dx*(-1))
 		this.slidesBox.classList.remove('dragging');

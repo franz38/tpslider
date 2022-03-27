@@ -48,9 +48,16 @@ import { SliderStyler, LoopStyler } from './components/stylehandler.js';
      this.shadow = dom_shadow
    }
 
+   setOffset(offset){
+     this.dom.style.marginLeft = offset + "px";
+   }
+
+   setPosition(position){
+     this.position = this.dom.offsetLeft - position;
+   }
+
    getShadowPosition(){ return this.shadow.offsetLeft; }
 
-   getPosition(){ return this.dom.offsetLeft; }
 
    setDot(dom_dot){
      this.dot = dom_dot
@@ -67,6 +74,7 @@ import { SliderStyler, LoopStyler } from './components/stylehandler.js';
    }
 
  }
+
 
 export default class TPSlider{
 
