@@ -1,4 +1,4 @@
-# Just Another Slider
+# TP Slider
 
 A vanilla javascript slider.
 
@@ -14,7 +14,7 @@ A vanilla javascript slider.
   })
 
   slider.start()
-  
+
 </script>
 ```
 
