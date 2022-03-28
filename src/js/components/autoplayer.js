@@ -6,9 +6,10 @@
 
 export default class AutoPlayer{
 
-  constructor(delay, slider){
+  constructor(delay, slider, perClick){
     this.delay = delay
     this.slider = slider
+    this.perClick = perClick
   }
 
   initialize(slider){
@@ -22,10 +23,11 @@ export default class AutoPlayer{
   */
 
   resetTimeout(){
-    
+
+    let delta = this.perClick
     var myself = this
     this.timeout = setTimeout(function () {
-      myself.slider.relativeShift(1)
+      myself.slider.relativeShift(delta)
     }, myself.delay);
 
   }

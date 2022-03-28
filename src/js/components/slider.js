@@ -65,13 +65,12 @@ class Slide{
 
 export class Slider{
 
-	constructor(dom, perView, slidesAmount, activeSlide, positions, autoPlayer, styleHandler, buttonManager, navigationManager, mouseDragManager, tmp_slides){
+	constructor(dom, perView, slidesAmount, activeSlide, autoPlayer, styleHandler, buttonManager, navigationManager, mouseDragManager, tmp_slides){
 
 		this.dom = dom
 		this.perView = perView
 		this.slidesAmount = slidesAmount
 		this.activeSlide = activeSlide
-		this.positions = positions
 		this.styleHandler = styleHandler
 		this.slides = this.dom.slidesBox.children
 
@@ -109,7 +108,7 @@ export class Slider{
 
 
 	refreshStyle(shift=false){
-		this.positions = this.styleHandler.refreshStyle(this.tmp_slides)
+		let tmp = this.styleHandler.refreshStyle(this.tmp_slides)
 
 		if (shift){
 		  this.shiftSlide(this.activeSlide)
@@ -141,8 +140,26 @@ export class Slider{
 
 	parseId(id_to_test) {
 
+
+
 	  if(id_to_test>=0 && id_to_test<this.tmp_slides.length){
-	    return id_to_test;
+
+
+			if(this.styleHandler.isCentered()){
+				return id_to_test;
+			}
+			else{
+
+				if(id_to_test+this.perView>this.tmp_slides.length){
+					return this.tmp_slides.length - this.perView;
+				}
+				else{
+					return id_to_test;
+				}
+			}
+
+
+
 	  }
 	  else if(id_to_test<0){
 	    return 0;

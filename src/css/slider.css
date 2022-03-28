@@ -21,10 +21,10 @@
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none; }
-  .wrapper .jas__nav {
+  .wrapper .tp__nav {
     display: flex;
     justify-content: center; }
-    .wrapper .jas__nav .jas__nav-button {
+    .wrapper .tp__nav .tp__nav-button {
       margin: 0px .25rem;
       padding: 0px .25rem;
       user-select: none;

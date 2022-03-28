@@ -35,7 +35,7 @@ Option | Default | Values | Description
 `navigationBox` | `'.jas__nav'` | String | Navigation dots container
 `navigationDot` | `'.jas__nav-button'` | String | Navigation dots class
 `navigationLabels` | `null` | `null`, `'numbers'`, `'slideTitle'` | HTML displayed in the dots
-`perView` | `1` | Integer | Number of visible items
+`perView` | `3` | Integer | Number of visible items
 `navSteps` | `1` | Integer | How many steps on button click
 `autoplayDelay` | `2000` | Integer | Autoplay Delay
-`breakpoints` | - | List of Obj, `(String media query)` => `(Obj)` | Available options : `items`, `factor`, `padding`, `center`
+`breakpoints` | - | Dictionary, `(Breakpoint)` => `(Values)` | Available options : `items`, `factor`, `padding`, `center`

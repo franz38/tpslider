@@ -53,6 +53,7 @@ section{
     text-align: left;
     padding: 1rem 3rem;
     border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.45);
     pre, code{
       font-family: 'Ubuntu Mono', monospace;
       line-height: 20px;
@@ -134,11 +135,11 @@ section{
     right: -4rem;
   }
 
-  .jas__nav{
+  .tp__nav{
     margin-top: 2rem;
   }
 
-  .jas__nav > .jas__nav-button{
+  .tp__nav > .tp__nav-button{
     font-weight: 500;
     min-width: 1.5rem;
     height: 1.5rem;
@@ -146,7 +147,7 @@ section{
     transition: background-color .2s ease;
   }
 
-  .jas__nav > .jas__nav-button--active{
+  .tp__nav > .tp__nav-button--active{
     text-decoration: underline;
     color: $black ;
     background-color: $white;

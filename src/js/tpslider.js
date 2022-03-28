@@ -84,7 +84,7 @@ export default class TPSlider{
 
   start(){
 
-    this.tmp_slides = []
+    this.slides = []
 
     // copy options and integrathe them with default
     this.parseOptions(this.custom_options)
@@ -92,22 +92,22 @@ export default class TPSlider{
     // look for wrapper and slides container
     this.getDom()
 
-    // console.log(this.tmp_slides);
+    // console.log(this.slides);
 
     var autoplayer = null;
     if (this.options.autoplay){
-      autoplayer = new AutoPlayer(this.options.autoplayDelay, null)
+      autoplayer = new AutoPlayer(this.options.autoplayDelay, null, this.options.navSteps)
     }
 
     var buttonManager = null;
     if(this.options.buttons){
-      buttonManager = new ButtonManager(this.dom.wrapper, this.options.prevButton, this.options.nextButton, 1)
+      buttonManager = new ButtonManager(this.dom.wrapper, this.options.prevButton, this.options.nextButton, this.options.navSteps)
     }
     // console.log(buttonManager)
 
     var navigationManager = null;
     if(this.options.navigation){
-      navigationManager = new NavigationManager(this.dom.wrapper, this.dom.slidesBox, this.options.navigationBox, this.options.navigationDot , this.options.navigationLabels, this.tmp_slides)
+      navigationManager = new NavigationManager(this.dom.wrapper, this.dom.slidesBox, this.options.navigationBox, this.options.navigationDot , this.options.navigationLabels, this.slides)
     }
     // console.log(navigationManager)
 
@@ -120,14 +120,17 @@ export default class TPSlider{
     if (this.options.mode == "slider"){
 
       var stylehandler = new SliderStyler(this.dom, this.options, this.sliderManager)
-      var slid = new Slider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, this.positions, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager, this.tmp_slides);
+      var slid = new Slider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager, this.slides);
 
     }
     else if (this.options.mode == "loop"){
+      throw "Loop slider not yet available";
+      // var stylehandler = new LoopStyler(this.dom, this.options, this.sliderManager, this.slides)
+      // var slid = new LoopSlider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, this.positions, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager, this.slides);
 
-      var stylehandler = new LoopStyler(this.dom, this.options, this.sliderManager, this.tmp_slides)
-      var slid = new LoopSlider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, this.positions, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager, this.tmp_slides);
-
+    }
+    else if (this.options.mode == "loop"){
+      throw "Static slider not yet available";
     }
 
     // console.log(this);
@@ -153,14 +156,15 @@ export default class TPSlider{
     slidesBox:".slides",
     prevButton:".prev",
     nextButton:".next",
-    navigationBox: ".jas__nav",
-    navigationDot: ".jas__nav-button",
+    navigationBox: ".tp__nav",
+    navigationDot: ".tp__nav-button",
     navigationLabels: "numbers",
-    perView: 1,
-    nav_steps: 1,
+    perView: 3,
+    navSteps: 1,
     padding: "1rem",
     breakpoints: null,
     autoplayDelay: 2000,
+    animationSpeed: 200,
 
   }
 
@@ -206,7 +210,7 @@ export default class TPSlider{
     this.sliderManager.amount = this.dom.slidesBox.getElementsByClassName('slide').length
 
     for(let i=0; i<this.sliderManager.amount; i++){
-      this.tmp_slides.push( new Slide(this.dom.slidesBox.getElementsByClassName('slide')[i], i) )
+      this.slides.push( new Slide(this.dom.slidesBox.getElementsByClassName('slide')[i], i) )
     }
 
   }

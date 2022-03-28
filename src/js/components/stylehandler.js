@@ -96,6 +96,10 @@ export class SliderStyler{
     return bp
   }
 
+  isCentered(){
+    return this.getBreakPoint().isCentered();
+  }
+
   refreshStyle(slides){
 
     this.actualBreakpointSum = this.getBreakPoint()

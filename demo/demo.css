@@ -36,7 +36,8 @@ section {
     box-shadow: inset 20px 20px 20px -5px rgba(0, 0, 0, 0.06), inset -20px -20px 20px -5px rgba(255, 255, 255, 0.02);
     text-align: left;
     padding: 1rem 3rem;
-    border-radius: 12px; }
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.45); }
     section .code-block pre, section .code-block code {
       font-family: 'Ubuntu Mono', monospace;
       line-height: 20px;
@@ -91,14 +92,14 @@ section {
   left: -4rem; }
 .wrapper .next {
   right: -4rem; }
-.wrapper .jas__nav {
+.wrapper .tp__nav {
   margin-top: 2rem; }
-.wrapper .jas__nav > .jas__nav-button {
+.wrapper .tp__nav > .tp__nav-button {
   font-weight: 500;
   min-width: 1.5rem;
   height: 1.5rem;
   transition: background-color .2s ease; }
-.wrapper .jas__nav > .jas__nav-button--active {
+.wrapper .tp__nav > .tp__nav-button--active {
   text-decoration: underline;
   color: #293241;
   background-color: #F4F1DE; }
