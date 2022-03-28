@@ -32,8 +32,8 @@ Option | Default | Values | Description
 `slidesBox` | `'.slides'` | String | Default: `'.slides'`
 `prevButton` | `'.prev'` | String | Default: `'.prev'`
 `nextButton` | `'.next'` | String | Default: `'.next'`
-`navigationBox` | `'.jas__nav'` | String | Navigation dots container
-`navigationDot` | `'.jas__nav-button'` | String | Navigation dots class
+`navigationBox` | `'.tp__nav'` | String | Navigation dots container
+`navigationDot` | `'.tp__nav-button'` | String | Navigation dots class
 `navigationLabels` | `null` | `null`, `'numbers'`, `'slideTitle'` | HTML displayed in the dots
 `perView` | `3` | Integer | Number of visible items
 `navSteps` | `1` | Integer | How many steps on button click
