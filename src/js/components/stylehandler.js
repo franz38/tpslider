@@ -46,13 +46,15 @@ export class SliderStyler{
   perView
   mode
 
-  constructor(dom, options, sliderManager){
+  constructor(dom, options, sliderManager, slides){
     // console.log(this);
     this.completeBreakPoints(options)
     this.dom = dom
+    this.options = options
     this.sliderManager = sliderManager
     this.perView = options.perView
     this.slidesAmount = sliderManager.amount
+    this.slides = slides
 
     this.mode = options.mode
 
@@ -105,24 +107,46 @@ export class SliderStyler{
     this.actualBreakpointSum = this.getBreakPoint()
     var style = this.actualBreakpointSum.getStyle()
 
-    this.setWrapperWidth()
+    this.setWrapperWidth(slides)
     this.makePositions(slides)
 
     return this.positions;
 
   }
 
-  setWrapperWidth(){
+  setWrapperWidth(slides){
 
     if (this.mode=="static"){
       this.dom.wrapper.style.width = "max-content";
     }
     else{
-      var w = 0;
-      for(var i=0; i<this.actualBreakpointSum.style.perView; i++){
-        w += this.dom.slidesBox.children[i].offsetWidth;
+
+
+      if (this.options.resizeSlider){
+        var w = 0;
+        for(var i=0; i<this.actualBreakpointSum.style.perView; i++){
+          w += this.dom.slidesBox.children[i].offsetWidth;
+        }
+        this.dom.wrapper.style.width = w + "px";
       }
-      this.dom.wrapper.style.width = w + "px";
+
+      if(this.options.resizeSlides){
+
+        let avgW = 0;
+        slides.forEach(slide => {
+          avgW += slide.width;
+        });
+        avgW = avgW/slides.length;
+
+        let ratio = this.dom.wrapper.clientWidth/(avgW*this.actualBreakpointSum.style.perView);
+
+        slides.forEach(slide => {
+          slide.Resize(slide.width*ratio);
+        });
+
+      }
+
+
     }
 
   }
@@ -167,50 +191,6 @@ export class SliderStyler{
       }
     }
 
-  }
-
-}
-
-export class LoopStyler extends SliderStyler{
-
-  constructor(dom, options, sliderManager, slides){
-    super(dom, options, sliderManager)
-    this.addMoreSlides(slides)
-  }
-
-  addMoreSlides(slides){
-
-    console.log(slides);
-
-    // console.log(this.dom.slidesBox.children[1])
-
-    let to_prepend = [];
-
-    for(var i=0; i<this.perView; i++){
-      let slide_copy = slides[i].dom.cloneNode([true])
-      this.dom.slidesBox.appendChild(slide_copy)
-      slides[i].setShadow(slide_copy)
-    }
-
-    for(var i=0; i<this.perView; i++){
-      let id = slides.length - i -1
-      let slide = slides[id].dom.cloneNode([true])
-      this.dom.slidesBox.prepend(slide)
-      slides[id].setShadow(slide)
-    }
-
-
-  }
-
-
-  makePositions(){
-    var slide_width = this.dom.slidesBox.getElementsByClassName('slide')[0].offsetWidth
-    var steps = this.dom.slidesBox.children.length
-    this.positions = new Array(steps);
-    this.positions[0] = 0
-    for(var i=1;i<steps;i++){
-      this.positions[i] = this.positions[i-1] - this.dom.slidesBox.children[i-1].offsetWidth
-    }
   }
 
 }

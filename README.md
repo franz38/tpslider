@@ -22,7 +22,6 @@ A vanilla javascript slider.
 
 Option | Default | Values | Description
 ---- | ---- | ---- | ----
-`mode` | `'slider'` | `'slider'`, `'static'`, `'loop'` | Define the slider behaviour
 `mouseDrag` | `true` | Boolean | Enable mouse swipe
 `buttons` | `true` | Boolean | Enable buttons
 `navigation` | `false` | Boolean | Enable navigations dots

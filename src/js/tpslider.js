@@ -4,8 +4,8 @@ import NavigationManager from './components/navigationmanager.js';
 import ButtonManager from './components/buttonmanager.js';
 import SwipeManager from './components/swipemanager.js';
 
-import { Slider, LoopSlider } from './components/slider.js';
-import { SliderStyler, LoopStyler } from './components/stylehandler.js';
+import { Slider } from './components/slider.js';
+import { SliderStyler } from './components/stylehandler.js';
 
 
 /*****************************************************************************************************************************
@@ -56,8 +56,13 @@ import { SliderStyler, LoopStyler } from './components/stylehandler.js';
      this.position = this.dom.offsetLeft - position;
    }
 
-   getShadowPosition(){ return this.shadow.offsetLeft; }
+   Resize(width){
+     this.dom.style.width = width + "px";
+     this.width = width;
+     this.position = this.dom.offsetLeft;
+   }
 
+   getShadowPosition(){ return this.shadow.offsetLeft; }
 
    setDot(dom_dot){
      this.dot = dom_dot
@@ -65,12 +70,12 @@ import { SliderStyler, LoopStyler } from './components/stylehandler.js';
 
    highlight(){
      this.dom.classList.add("active")
-     if(this.dot != null){ this.dot.classList.add("jas__nav-button--active") }
+     if(this.dot != null){ this.dot.classList.add("tp__nav-button--active") }
    }
 
    deemphasizes(){
      this.dom.classList.remove("active")
-     if(this.dot != null){ this.dot.classList.remove("jas__nav-button--active") }
+     if(this.dot != null){ this.dot.classList.remove("tp__nav-button--active") }
    }
 
  }
@@ -119,7 +124,7 @@ export default class TPSlider{
 
     if (this.options.mode == "slider"){
 
-      var stylehandler = new SliderStyler(this.dom, this.options, this.sliderManager)
+      var stylehandler = new SliderStyler(this.dom, this.options, this.sliderManager, this.slides)
       var slid = new Slider(this.dom, this.options.perView, this.sliderManager.amount, this.sliderManager.position, autoplayer, stylehandler, buttonManager, navigationManager, mouseDragManager, this.slides);
 
     }
@@ -165,6 +170,8 @@ export default class TPSlider{
     breakpoints: null,
     autoplayDelay: 2000,
     animationSpeed: 200,
+    resizeSlider: true,
+    resizeSlides: false,
 
   }
 

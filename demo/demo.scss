@@ -21,6 +21,7 @@ body {
   height: 100%;
   color: #333;
   font-family: 'Lexend', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   text-align: center;
   letter-spacing: 0.15em;
 }
@@ -79,6 +80,7 @@ section{
     height: calc(100% - 8px);
     height: 10rem;
     width: 16rem;
+    max-width: 100%;
     border:4px solid #F4F1DE;
     color:#F4F1DE;
     background-color: rgba(#F4F1DE, .2);
